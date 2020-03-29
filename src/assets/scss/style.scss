@@ -1,0 +1,50 @@
+@import './animation/slideUpFade';
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  @apply text-base text-default bg-lighter;
+}
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// linear-gradient(to right bottom, #0052cc, #0052cd, #0053cd, #0053ce, #0054cf)
+.slideUpFade {
+  animation: slideUpFade 0.4s ease;
+}
+.delete-dialog {
+  .dg-btn {
+    &.dg-btn--ok {
+      @apply bg-danger #{!important};
+    }
+  }
+}
+.dg-btn {
+  &.dg-btn--cancel {
+    @apply text-default;
+    &:hover {
+      @apply bg-lighter #{!important};
+    }
+    background-color: transparent !important;
+  }
+  &.dg-btn--ok {
+    @apply bg-primary #{!important};
+    color: white !important;
+    border: none !important;
+  }
+}
+.group:hover .group-hover\:visible {
+  visibility: visible;
+}

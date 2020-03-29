@@ -1,0 +1,18 @@
+{
+  "name": "oTab - BrowserExtension",
+  "description": "A better way to organize your browser tabs",
+  "version": null,
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "oTab - BrowserExtension",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": ["tabs", "storage", "alarms", "unlimitedStorage"]
+}

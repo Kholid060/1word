@@ -9,7 +9,7 @@
       <button-ui type="primary" :disabled="!isValid" @click="addWebsite">Add website</button-ui>
     </div>
     <div class="mt-8 grid grid-cols-2 gap-3">
-      <list-ui v-for="(website, index) in $store.state.blockedWebsite" :title="website">
+      <list-ui v-for="(website, index) in $store.state.blockedWebsite" :key="website" :title="website">
         <p class="flex-grow" style="max-width: 500px">{{ website }}</p>
         <mdi-icon name="mdi-delete" class="text-danger cursor-pointer" @click="deleteWebsite(index)"></mdi-icon>
       </list-ui>
@@ -17,8 +17,8 @@
   </div>
 </template>
 <script>
-import isURL from '~/utils/isURL';
 import url from 'url';
+import isURL from '~/utils/isURL';
 
 export default {
   data: () => ({
@@ -35,7 +35,7 @@ export default {
       const URL = `${protocol}//${hostname}`;
 
       if (!this.isValid) return;
-      else if (this.$store.state.blockedWebsite.includes(URL)) return this.$toast.error(`You already add ${hostname}`);
+      if (this.$store.state.blockedWebsite.includes(URL)) return this.$toast.error(`You already add ${hostname}`);
 
       this.$store.commit('blockedWebsite', {
         type: 'add',

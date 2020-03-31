@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import MdiIcon from '~/BaseComponents/BaseMdiIcon';
 import {
   mdiHome,
   mdiMagnify,
@@ -17,6 +16,7 @@ import {
   mdiLinkLock,
   mdiLink,
 } from '@mdi/js';
+import MdiIcon from '~/BaseComponents/BaseMdiIcon';
 
 MdiIcon.add({
   mdiHome,

@@ -24,7 +24,7 @@
         </v-popover>
       </div>
       <VuePerfectScrollbar class="mt-4 pb-6 flex-grow px-6 overflow-auto">
-        <router-link :to="`/learn/${learn.learn_id}`" v-for="learn in learns">
+        <router-link :to="`/learn/${learn.learn_id}`" v-for="learn in learns" :key="learn.learn_id">
           <flag-card :id="learn.learn_id" :word-length="learn.words.length" :active="$route.params.id === learn.learn_id"></flag-card>
         </router-link>
       </VuePerfectScrollbar>

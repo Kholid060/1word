@@ -10,7 +10,7 @@
             <mdi-icon name="mdi-close"></mdi-icon>
           </button-ui>
         </div>
-        <form @keyup.enter="formHandler" @submit.prevent="formHandler">
+        <form @submit.prevent="formHandler">
           <input-ui block v-model="data.tempWord" placeholder="Title"></input-ui>
           <textarea-ui v-model="data.tempMeaning" block height="110px" placeholder="Meaning" class="mt-3"></textarea-ui>
           <select-ui class="mt-3" block :list="learns" v-model="data.learnId" v-if="data.type === 'add'">
@@ -53,25 +53,15 @@ export default {
     formHandler() {
       this.data.type === 'add' ? this.addWord() : this.editWord();
     },
-    editWord() {
-      this.checkWord().then(() => {
-        Word.update({
-          where: this.data.id,
-          data: {
-            title: this.data.tempWord,
-            meaning: this.data.tempMeaning,
-          },
-        });
-        this.clearAll();
-      });
-    },
-    checkWord() {
+    checkWord(type) {
       return new Promise((resolve, reject) => {
-        if (this.data.tempWord === '' && this.data.tempMeaning === '') reject();
+        const { tempWord, tempMeaning, learnId, id } = this.data;
+
+        if (tempWord === '' && tempMeaning === '') reject();
 
         const isWordExist = Word.query()
           .where(word => {
-            return validateExistWord(word, this.data.tempWord, this.data.tempMeaning, this.data.learnId);
+            return validateExistWord(word, tempWord, tempMeaning, learnId) && word.id !== id;
           })
           .exists();
 
@@ -81,6 +71,18 @@ export default {
         } else {
           resolve();
         }
+      });
+    },
+    editWord() {
+      this.checkWord('edit').then(() => {
+        Word.update({
+          where: this.data.id,
+          data: {
+            title: this.data.tempWord,
+            meaning: this.data.tempMeaning,
+          },
+        });
+        this.clearAll();
       });
     },
     addWord() {
@@ -102,11 +104,11 @@ export default {
     open(data) {
       this.show = true;
 
-      const assignData = Object.assign({}, this.data, data);
+      const assignData = { ...this.data, ...data };
 
       this.data = assignData;
 
-      const learnId = data.learn_id;
+      const learnId = this.$store.state.popup.activeId;
       this.data.learnId = !!learnId && learnId !== 'all' ? learnId : this.learns[0];
     },
     clearAll() {

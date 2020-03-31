@@ -5,6 +5,7 @@
 </template>
 <script>
 import scrollPosition from '~/mixins/scrollPosition';
+
 export default {
   mixins: [scrollPosition],
   name: 'to-top-button',

@@ -1,12 +1,12 @@
 <template>
-  <div class="content rounded-tl-lg rounded-tr-lg -mt-6 px-5 pb-10 pt-6 bg-lighter" id="content">
+  <div class="content rounded-tl-lg rounded-tr-lg -mt-6 px-5 mb-20 pt-6 bg-lighter" id="content">
     <swiper :options="swiperOption" class="mb-5">
       <swiper-slide>
         <div class="flag-list" :class="{ 'border-primary': activeId === 'all' }" @click="activeId = 'all'" title="All">
           <mdi-icon name="mdi-earth" size="40"></mdi-icon>
         </div>
       </swiper-slide>
-      <swiper-slide v-for="learn in learns">
+      <swiper-slide v-for="learn in learns" :key="learn.learn_id">
         <div class="flag-list" :class="{ 'border-primary': activeId === learn.learn_id }" @click="activeId = learn.learn_id">
           <flag-ui size="40" :code="learn.learn_id | getLang('country')" style="border-radius: 99px"></flag-ui>
         </div>
@@ -17,8 +17,8 @@
   </div>
 </template>
 <script>
-import Learn from '~/store/models/Learn';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
+import Learn from '~/store/models/Learn';
 import 'swiper/dist/css/swiper.css';
 import WordList from './WordList.vue';
 

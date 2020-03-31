@@ -1,13 +1,10 @@
-global.browser = require('webextension-polyfill');
+import url from 'url';
 import { setStorage, getStorage } from '~/utils/storage';
 import isURL from '~/utils/isURL';
 
-browser.runtime.onInstalled.addListener(async () => {
-  // browser.tabs.create({
-  //   active: true,
-  //   url: browser.runtime.getURL('/tab/tab.html#/welcome')
-  // })
+global.browser = require('webextension-polyfill');
 
+browser.runtime.onInstalled.addListener(async () => {
   const dataKey = ['learns', 'practices', 'words', 'blockedWebsite'];
   const data = await getStorage(dataKey);
 
@@ -16,7 +13,12 @@ browser.runtime.onInstalled.addListener(async () => {
       learns: [],
       practices: [],
       words: [],
-      blockedWebsite: ['https://google.com', 'https://mail.google.com', 'https://youtube.com', 'https://bing.com'],
+      blockedWebsite: ['https://www.google.com', 'https://mail.google.com', 'https://www.youtube.com', 'https://www.bing.com'],
+    });
+
+    browser.tabs.create({
+      active: true,
+      url: browser.runtime.getURL('/tab/tab.html#/welcome'),
     });
   }
 });
@@ -25,4 +27,20 @@ browser.runtime.onMessage.addListener((request, sender) => {
   return new Promise(resolve => {
     resolve();
   });
+});
+
+browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  if (changeInfo.status === 'complete') {
+    const { blockedWebsite } = await getStorage('blockedWebsite');
+    const hostList = blockedWebsite.map(web => url.parse(web).hostname);
+    const isBlocked = hostList.includes(url.parse(tab.url).hostname);
+    if (!isBlocked && isURL(tab.url)) {
+      browser.tabs.executeScript(tabId, {
+        file: '/content/index.js',
+      });
+      browser.tabs.insertCSS(tabId, {
+        file: '/content/index.css',
+      });
+    }
+  }
 });

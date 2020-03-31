@@ -35,7 +35,7 @@ export default {
               total: {
                 show: true,
                 fontFamily: 'Inter, sans-serif',
-                formatter: function(w) {
+                formatter(w) {
                   return w.globals.seriesTotals.reduce((a, b) => {
                     return a + b;
                   }, 0);

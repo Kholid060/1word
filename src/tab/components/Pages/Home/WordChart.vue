@@ -6,8 +6,8 @@
 </template>
 <script>
 import Apexchart from 'vue-apexcharts';
-import Word from '~/store/models/Word';
 import dayjs from 'dayjs';
+import Word from '~/store/models/Word';
 
 import Learn from '~/store/models/Learn';
 

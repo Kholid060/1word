@@ -1,4 +1,5 @@
 import Vue from 'vue';
+
 const browser = require('webextension-polyfill');
 
 const storage = browser.storage.local;

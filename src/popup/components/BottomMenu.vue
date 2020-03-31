@@ -21,6 +21,7 @@ export default {
           active: true,
           url: this.$browser.runtime.getURL('/tab/tab.html#/'),
         });
+        window.close();
       });
     },
     openPopup() {

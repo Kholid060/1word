@@ -16,7 +16,6 @@
 <script>
 import SideMenu from './components/layout/SideMenu.vue';
 import Aside from './components/layout/Aside.vue';
-import Learn from '~/store/models/learn';
 import retrieveData from '~/utils/retrieveData';
 import extTab from '~/utils/extTab';
 
@@ -30,7 +29,7 @@ export default {
     };
   },
   created() {
-    extTab().catch(async tabs => {
+    extTab().catch(tabs => {
       this.$browser.tabs.remove(tabs.filter(tab => !tab.active).map(tab => tab.id));
     });
     // function randomDate(start, end) {
@@ -79,9 +78,9 @@ export default {
     //   ]
     // })
     retrieveData().then(({ learns }) => {
-      this.retrieved = true;
-
       if (learns.length === 0) this.$router.push({ path: '/welcome', query: { id: 'add-learn' } });
+
+      this.retrieved = true;
     });
   },
 };

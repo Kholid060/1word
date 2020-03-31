@@ -7,11 +7,11 @@
   </div>
 </template>
 <script>
+import url from 'url';
 import Header from './components/Header.vue';
 import Content from './components/Content.vue';
 import BottomMenu from './components/BottomMenu.vue';
 import AddWord from './components/AddWord.vue';
-import url from 'url';
 
 import retrieveData from '~/utils/retrieveData';
 
@@ -44,8 +44,7 @@ export default {
   mounted() {
     const contentEl = document.getElementById('content');
     contentEl.addEventListener('scroll', event => {
-      console.log(contentEl.scrollTop >= 125);
-      this.small = contentEl.scrollTop >= 125;
+      this.small = contentEl.scrollTop >= 50;
     });
   },
 };

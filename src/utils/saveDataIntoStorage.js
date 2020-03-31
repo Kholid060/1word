@@ -1,4 +1,4 @@
-import { setStorage, getStorage } from './storage';
+import { setStorage } from './storage';
 import Practice from '~/store/models/Practice';
 import Learn from '~/store/models/Learn';
 import Word from '~/store/models/Word';

@@ -1,5 +1,6 @@
-const browser = require('webextension-polyfill');
 import url from 'url';
+
+const browser = require('webextension-polyfill');
 
 export default function() {
   return new Promise(async (resolve, reject) => {

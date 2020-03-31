@@ -1,0 +1,90 @@
+@import '~/assets/scss/base/variables.scss';
+
+.oneWord-match {
+  position: relative;
+  cursor: pointer;
+  &:before {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    background-color: rgba(0, 82, 204, 0.2);
+    content: '';
+    bottom: 0;
+    border-radius: 2px;
+    transition: all 0.2s cubic-bezier(0.26, 0.13, 0.17, 1.05);
+  }
+  &:hover:before {
+    height: 100%;
+    background-color: rgba(0, 82, 204, 0.4);
+  }
+}
+
+.oneWord-popover {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  width: 270px;
+  z-index: 999;
+  &--title {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+  p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+  &--select {
+    cursor: pointer;
+  }
+  &--textarea {
+    resize: vertical;
+    max-height: 150px;
+    min-height: 60px;
+  }
+  &--input,
+  &--select {
+    min-height: 40px !important;
+  }
+  &--input,
+  &--textarea,
+  &--select {
+    font-size: 15px;
+    border-radius: 13px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid $n30 !important;
+    background-color: #f7fafc !important;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.2s ease;
+    margin: 10px 0 0 0;
+    &:focus {
+      outline: none !important;
+      box-shadow: unset !important;
+    }
+    &:hover,
+    &:focus {
+      background-color: #eff5fe;
+    }
+  }
+  &--button {
+    margin-top: 20px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: $primary;
+    color: white;
+    border-radius: 13px;
+    font-size: 16px;
+    font-weight: bold;
+    &[disabled='disabled'] {
+      background-color: #f7fafc;
+      opacity: 0.8;
+      pointer-events: none;
+      color: $n200;
+    }
+  }
+  color: $n800 !important;
+  font-size: 16px !important;
+}

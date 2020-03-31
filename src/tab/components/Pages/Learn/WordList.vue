@@ -14,7 +14,7 @@
               <input-ui class="w-5/12 mr-3" @input="inputTempWord" :value="tempWord" placeholder="Word" type="background"></input-ui>
               <input-ui class="w-6/12" v-model="tempMeaning" placeholder="Meaning" type="background"></input-ui>
             </form>
-            <div class="self-center" style="width: 70px;">
+            <div class="self-center" style="width: 80px;">
               <mdi-icon name="mdi-close" title="edit" class="text-light" @click="clearAll" size="24"></mdi-icon>
               <mdi-icon name="mdi-check" title="edit" class="text-primary ml-2" @click="updateWord(word)" size="24"></mdi-icon>
             </div>
@@ -37,8 +37,8 @@
   </card-ui>
 </template>
 <script>
-import Word from '~/store/models/Word';
 import debounce from 'lodash.debounce';
+import Word from '~/store/models/Word';
 import validateExistWord from '~/utils/validateExistWord';
 
 export default {

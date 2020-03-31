@@ -1,11 +1,10 @@
 import findAndReplaceDOMText from 'findandreplacedomtext';
 
 import generateRegex from './generateRegex';
-import removeDuplicate from './removeDuplicate';
 import createElement from './createElement';
 
 export default function(target, words) {
-  const removeDuplicateWord = removeDuplicate(words);
+  const removeDuplicateWord = Array.from(new Set(words));
   const matchWords = [];
   return new Promise(resolve => {
     findAndReplaceDOMText(target, {

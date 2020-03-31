@@ -1,7 +1,7 @@
 <template>
   <card-ui class="add-word" tabindex="0">
     <p slot="header">Add word</p>
-    <form @submit.prevent="addWord">
+    <form @submit.prevent="addWord" @keyup.enter="addWord">
       <div class="flex">
         <div class="p-2 text-light rounded-lg word-dec bg-lighter mr-3">
           <mdi-icon name="mdi-message-processing"></mdi-icon>
@@ -10,15 +10,15 @@
       </div>
       <div class="hidden-input">
         <textarea-ui v-model="meaning" placeholder="Meaning" min-height="100px" block class="mt-4 mb-8"></textarea-ui>
-        <button-ui block :disabled="!(!!word && !!meaning)" type="primary" @click="addWord">Add word</button-ui>
+        <button-ui block :disabled="!(!!word && !!meaning)" type="primary">Add word</button-ui>
       </div>
     </form>
   </card-ui>
 </template>
 <script>
+import debounce from 'lodash.debounce';
 import Word from '~/store/models/Word';
 import validateExistWord from '~/utils/validateExistWord';
-import debounce from 'lodash.debounce';
 import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
 
 export default {
@@ -51,7 +51,7 @@ export default {
         },
       });
 
-      saveDataIntoStorage('words');
+      saveDataIntoStorage('words', 'ttt');
 
       this.word = this.meaning = '';
     },

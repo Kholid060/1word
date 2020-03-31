@@ -1,6 +1,6 @@
 import { Model } from '@vuex-orm/core';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
 import shortId from 'shortId';
+import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
 
 export default class Practice extends Model {
   static entity = 'practices';

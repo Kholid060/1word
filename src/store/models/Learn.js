@@ -1,8 +1,8 @@
 import { Model } from '@vuex-orm/core';
+import shortId from 'shortId';
 import Word from './Word';
 import Practice from './Practice';
 import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
-import shortId from 'shortId';
 
 export default class Learn extends Model {
   static entity = 'learns';

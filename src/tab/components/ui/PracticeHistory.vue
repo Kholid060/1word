@@ -84,9 +84,11 @@ export default {
     getScoreBackground(score) {
       if (score <= 40) {
         return 'bg-danger';
-      } else if (score >= 41 && score <= 75) {
+      }
+      if (score >= 41 && score <= 75) {
         return 'bg-warning';
-      } else if (score >= 76) {
+      }
+      if (score >= 76) {
         return 'bg-primary';
       }
     },

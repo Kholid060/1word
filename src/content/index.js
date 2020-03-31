@@ -1,10 +1,17 @@
 import './style.scss';
-import getWords from './utils/getWords';
+import { getStorage } from '~/utils/storage';
 import findAndReplaceDOMText from './utils/findAndReplaceDOMText';
-import removeDuplicate from './utils/removeDuplicate';
-import popper from './utils/popper';
+import popper from './components/popper';
 
-const browser = require('webextension-polyfill');
+// Create popover container
+(function() {
+  if (document.getElementById('oneWord-popover')) return;
+
+  const popoverEl = document.createElement('div');
+  popoverEl.setAttribute('id', 'oneWord-popover');
+  popoverEl.classList.add('oneWord-popover');
+  document.body.appendChild(popoverEl);
+})();
 
 document.addEventListener('dblclick', event => {
   const text = window
@@ -13,15 +20,24 @@ document.addEventListener('dblclick', event => {
     .trim()
     .toLocaleLowerCase();
   const hasAttribute = attribute => event.target.hasAttribute(attribute);
-  if (!!text && !hasAttribute('word-data') && !hasAttribute('popover-container')) popper(event, 'add', text);
+  const virtualElement = {
+    getBoundingClientRect: () => ({
+      width: 0,
+      height: 0,
+      top: event.clientY + 7,
+      right: event.clientX,
+      bottom: event.clientY + 7,
+      left: event.clientX,
+    }),
+  };
+  const hasOneWordClass = /oneWord-/g.test(event.target.className);
+
+  if (!!text && !hasOneWordClass && !hasAttribute('oneWord-data')) popper(virtualElement, 'AddWord', text);
 });
 
-getWords().then(async words => {
-  if (Object.keys(words).length === 0) return;
+getStorage('words').then(({ words }) => {
+  if (words.length === 0) return;
+
   const mapWordTitle = words.map(word => word.title);
-  findAndReplaceDOMText(document.body, mapWordTitle).then(matchWords => {
-    const removeDuplicateMatchWord = removeDuplicate(matchWords);
-    const sendWordsPayload = words.filter(word => removeDuplicateMatchWord.includes(word.title));
-    browser.runtime.sendMessage({ to: 'background', type: 'matchWord', data: sendWordsPayload });
-  });
+  findAndReplaceDOMText(document.body, mapWordTitle);
 });

@@ -2,7 +2,7 @@
   <card-ui class="mt-6 word-list">
     <template v-for="word in paginateData">
       <list-ui class="group" dense>
-        <flag-ui :code="word.learn_id" size="28" class="shadow-xl" v-if="active === 'all'"></flag-ui>
+        <flag-ui :code="word.learn_id | getLang('country')" size="28" class="shadow-xl" v-if="active === 'all'"></flag-ui>
         <div class="w-9/12">
           <p class="text-overflow">{{ word.title }}</p>
           <p class="text-overflow text-light">{{ word.meaning }}</p>

@@ -11,7 +11,7 @@
     <div class="flex items-center mb-5" v-for="item in sources">
       <flag-ui :code="item.id | getLang('country')" size="60" class="inline-block shadow-xl mr-5"></flag-ui>
       <swiper class="swiper py-6 px-5" :options="swiperOption" style="width: calc(100vw - 15rem); margin: 0">
-        <swiper-slide v-for="website in filterByCategory(item.sources)">
+        <swiper-slide v-for="website in filterByCategory(item.sources)" :key="website.url">
           <a :href="website.url" target="_blank" rel="noreferrer">
             <card-ui class="inline-block cursor-pointer" hover>
               <template slot="header">
@@ -30,8 +30,8 @@
   </div>
 </template>
 <script>
-import { categories, sources } from '~/utils/readSources';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
+import { categories, sources } from '~/utils/readSources';
 import 'swiper/dist/css/swiper.css';
 import Learn from '~/store/models/Learn';
 

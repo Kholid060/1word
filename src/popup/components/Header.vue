@@ -15,8 +15,8 @@
   </div>
 </template>
 <script>
-import Word from '~/store/models/Word';
 import url from 'url';
+import Word from '~/store/models/Word';
 
 export default {
   props: {
@@ -31,7 +31,7 @@ export default {
       return Word.query()
         .where(word => {
           if (popup.activeId === 'all') return true;
-          else return word.learn_id === popup.activeId;
+          return word.learn_id === popup.activeId;
         })
         .count();
     },
@@ -52,10 +52,10 @@ export default {
       return this.$store.state.blockedWebsite.includes(this.currentWebsite);
     },
     getActiveName() {
-      const activeId = this.$store.state.popup.activeId;
+      const { activeId } = this.$store.state.popup;
 
       if (activeId !== 'all') return this.$options.filters.getLang(activeId);
-      else return '1Word';
+      return '1Word';
     },
   },
   methods: {

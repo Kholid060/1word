@@ -7,7 +7,7 @@
           <p>{{ data.type === 'add' ? 'Add' : 'Edit' }} word</p>
           <div class="flex-grow"></div>
           <button-ui plain icon @click="clearAll">
-            <mdi-icon name="mdi-close"></mdi-icon>
+            <v-mdi name="mdi-close"></v-mdi>
           </button-ui>
         </div>
         <form @submit.prevent="formHandler">

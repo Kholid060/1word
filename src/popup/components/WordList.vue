@@ -7,8 +7,8 @@
           <p class="text-overflow">{{ word.title }}</p>
           <p class="text-overflow text-light">{{ word.meaning }}</p>
         </div>
-        <mdi-icon name="mdi-pencil" @click="editWord(word)" class="text-light mr-2 invisible group-hover:visible cursor-pointer"></mdi-icon>
-        <mdi-icon name="mdi-delete" class="text-danger cursor-pointer" @click="deleteWord(word)"></mdi-icon>
+        <v-mdi name="mdi-pencil" @click="editWord(word)" class="text-light mr-2 invisible group-hover:visible cursor-pointer"></v-mdi>
+        <v-mdi name="mdi-delete" class="text-danger cursor-pointer" @click="deleteWord(word)"></v-mdi>
       </list-ui>
     </template>
     <p class="text-center" v-show="words.length === 0">No data</p>

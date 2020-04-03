@@ -1,10 +1,10 @@
 <template>
   <div class="bottom-menu h-16 flex items-center justify-evenly">
     <button-ui icon plain @click="openDashboard" v-tooltip.top="'Dashboard'">
-      <mdi-icon name="mdi-home"></mdi-icon>
+      <v-mdi name="mdi-home"></v-mdi>
     </button-ui>
     <button-ui icon round type="primary" @click="openPopup" v-tooltip.top="'Add word'" class="shadow-xl -mt-8">
-      <mdi-icon name="mdi-plus" size="40"></mdi-icon>
+      <v-mdi name="mdi-plus" size="40"></v-mdi>
     </button-ui>
     <button-ui icon plain> </button-ui>
   </div>

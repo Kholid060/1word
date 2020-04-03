@@ -9,10 +9,10 @@
     </div>
     <div class="ml-8">
       <button-ui icon @click="$emit('changePage', 'prev')" :disabled="currentPage <= 0">
-        <mdi-icon name="mdi-chevron-down" rotate="90"></mdi-icon>
+        <v-mdi name="mdi-chevron-down" :rotate="90"></v-mdi>
       </button-ui>
       <button-ui icon class="ml-2" @click="$emit('changePage', 'next')" :disabled="currentPage >= pageCount - 1">
-        <mdi-icon name="mdi-chevron-down" rotate="270"></mdi-icon>
+        <v-mdi name="mdi-chevron-down" :rotate="270"></v-mdi>
       </button-ui>
     </div>
   </div>

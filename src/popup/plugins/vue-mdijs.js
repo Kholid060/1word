@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import { mdiHome, mdiMagnify, mdiPower, mdiEarth, mdiPencil, mdiDelete, mdiChevronDown, mdiPlus, mdiClose } from '@mdi/js';
-import MdiIcon from '~/BaseComponents/BaseMdiIcon';
+import VueMdijs from 'vue-mdijs';
 
-MdiIcon.add({
+VueMdijs.add({
   mdiHome,
   mdiMagnify,
   mdiPower,
@@ -14,4 +14,4 @@ MdiIcon.add({
   mdiClose,
 });
 
-Vue.component(MdiIcon.name, MdiIcon);
+Vue.use(VueMdijs);

@@ -7,10 +7,10 @@
         <input v-model="questionLength" min="10" type="number" class="rounded-lg px-5 font-semibold w-9/12 mr-4 focus:outline-none text-center bg-light appearance-none text-2xl" />
         <div class="w-3/12">
           <button-ui icon @click="incNumber" :disabled="questionLength >= wordLength">
-            <mdi-icon name="mdi-plus"></mdi-icon>
+            <v-mdi name="mdi-plus"></v-mdi>
           </button-ui>
           <button-ui icon class="mt-2" @click="decNumber" :disabled="questionLength <= 10">
-            <mdi-icon name="mdi-minus"></mdi-icon>
+            <v-mdi name="mdi-minus"></v-mdi>
           </button-ui>
         </div>
       </div>

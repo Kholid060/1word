@@ -5,7 +5,7 @@
         <p class="text-light text-lg">Learns</p>
         <v-popover placement="left">
           <button-ui icon v-tooltip.left="'Add language'" class="shadow-xl">
-            <mdi-icon name="mdi-plus" class="text-primary"></mdi-icon>
+            <v-mdi name="mdi-plus" class="text-primary"></v-mdi>
           </button-ui>
           <card-ui slot="popover" class="shadow-xl border" width="250px">
             <p slot="header">Add learn</p>

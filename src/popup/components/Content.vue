@@ -3,7 +3,7 @@
     <swiper :options="swiperOption" class="mb-5">
       <swiper-slide>
         <div class="flag-list" :class="{ 'border-primary': activeId === 'all' }" @click="activeId = 'all'" title="All">
-          <mdi-icon name="mdi-earth" size="40"></mdi-icon>
+          <v-mdi name="mdi-earth" size="40"></v-mdi>
         </div>
       </swiper-slide>
       <swiper-slide v-for="learn in learns" :key="learn.learn_id">

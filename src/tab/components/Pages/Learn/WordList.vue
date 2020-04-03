@@ -15,16 +15,16 @@
               <input-ui class="w-6/12" v-model="tempMeaning" placeholder="Meaning" type="background"></input-ui>
             </form>
             <div class="self-center" style="width: 80px;">
-              <mdi-icon name="mdi-close" title="edit" class="text-light" @click="clearAll" size="24"></mdi-icon>
-              <mdi-icon name="mdi-check" title="edit" class="text-primary ml-2" @click="updateWord(word)" size="24"></mdi-icon>
+              <v-mdi name="mdi-close" title="edit" class="text-light" @click="clearAll" size="24"></v-mdi>
+              <v-mdi name="mdi-check" title="edit" class="text-primary ml-2" @click="updateWord(word)" size="24"></v-mdi>
             </div>
           </template>
           <template v-else>
             <p class="text-overflow pr-2 w-5/12">{{ word.title }}</p>
             <p class="text-overflow w-5/12">{{ word.meaning }}</p>
             <div class="w-2/12 text-right self-center">
-              <mdi-icon name="mdi-pencil" title="edit" class="text-light edit-btn" @click="setEditWord(word)" size="24"></mdi-icon>
-              <mdi-icon name="mdi-delete" title="delete" class="text-danger ml-2" @click="deleteWord(word.id)" size="24"></mdi-icon>
+              <v-mdi name="mdi-pencil" title="edit" class="text-light edit-btn" @click="setEditWord(word)" size="24"></v-mdi>
+              <v-mdi name="mdi-delete" title="delete" class="text-danger ml-2" @click="deleteWord(word.id)" size="24"></v-mdi>
             </div>
           </template>
         </list-ui>

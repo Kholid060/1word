@@ -7,10 +7,10 @@
     <div
       class="block-button p-3 rounded-full shadow-xl"
       :class="{ blocked: isWebBlocked }"
-      v-tooltip.left="isWebBlocked ? 'Unblock website' : 'Block website'"
+      v-tooltip.left="`${isWebBlocked ? 'Enable' : 'Disable'} 1Word for this site`"
       @click="blockBtnHandler"
     >
-      <mdi-icon name="mdi-power" :size="elementSize.btn"></mdi-icon>
+      <v-mdi name="mdi-power" :size="elementSize.btn"></v-mdi>
     </div>
   </div>
 </template>

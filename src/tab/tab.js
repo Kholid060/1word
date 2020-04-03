@@ -5,7 +5,7 @@ import router from './router';
 
 // Plugin
 import './plugins/v-tooltip';
-import './plugins/vue-mdi-js';
+import './plugins/vue-mdijs';
 import './plugins/vue-toastification';
 import './plugins/vuejs-dialog';
 

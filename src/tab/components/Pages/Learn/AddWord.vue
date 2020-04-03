@@ -4,7 +4,7 @@
     <form @submit.prevent="addWord" @keyup.enter="addWord">
       <div class="flex">
         <div class="p-2 text-light rounded-lg word-dec bg-lighter mr-3">
-          <mdi-icon name="mdi-message-processing"></mdi-icon>
+          <v-mdi name="mdi-message-processing"></v-mdi>
         </div>
         <input-ui class="flex-grow" :value="word" @input="inputWord" placeholder="Word"></input-ui>
       </div>

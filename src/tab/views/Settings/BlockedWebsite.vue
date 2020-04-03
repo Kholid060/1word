@@ -3,7 +3,7 @@
     <p class="mb-5">Blocked website</p>
     <div class="flex items-center">
       <div class="p-2 rounded-lg bg-lighter">
-        <mdi-icon name="mdi-link"></mdi-icon>
+        <v-mdi name="mdi-link"></v-mdi>
       </div>
       <input-ui class="flex-grow mr-4 ml-2" v-model="website" placeholder="https://example.com" @keyup.enter.native="addWebsite"></input-ui>
       <button-ui type="primary" :disabled="!isValid" @click="addWebsite">Add website</button-ui>
@@ -11,7 +11,7 @@
     <div class="mt-8 grid grid-cols-2 gap-3">
       <list-ui v-for="(website, index) in $store.state.blockedWebsite" :key="website" :title="website">
         <p class="flex-grow" style="max-width: 500px">{{ website }}</p>
-        <mdi-icon name="mdi-delete" class="text-danger cursor-pointer" @click="deleteWebsite(index)"></mdi-icon>
+        <v-mdi name="mdi-delete" class="text-danger cursor-pointer" @click="deleteWebsite(index)"></v-mdi>
       </list-ui>
     </div>
   </div>

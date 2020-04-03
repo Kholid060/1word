@@ -6,7 +6,7 @@
         <card-ui width="320px">
           <router-link v-for="setting in settings" :to="setting.path" :key="setting.path" class="mt-3 first:mt-0">
             <list-ui class="cursor-pointer" :class="{ 'bg-light text-primary': setting.path === $route.name }">
-              <mdi-icon :name="setting.icon" slot="prefix"></mdi-icon>
+              <v-mdi :name="setting.icon" slot="prefix"></v-mdi>
               <span>{{ setting.name }}</span>
             </list-ui>
           </router-link>

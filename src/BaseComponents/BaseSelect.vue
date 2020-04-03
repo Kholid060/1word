@@ -5,7 +5,7 @@
         <slot name="selected" :value="value">
           <p class="text-overflow text">{{ value }}</p>
         </slot>
-        <mdi-icon name="mdi-chevron-down"></mdi-icon>
+        <v-mdi name="mdi-chevron-down"></v-mdi>
       </div>
     </div>
     <card-ui slot="popover" class="shadow-xl border select-ui--content">

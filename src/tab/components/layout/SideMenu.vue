@@ -4,7 +4,7 @@
       <img :src="getImage('icon')" class="rounded-lg mb-12" />
       <router-link :to="item.path" v-for="item in navs" class="mb-8" :key="item.name">
         <button-ui type="secondary" icon :plain="$route.name !== item.name" v-tooltip.right="item.name">
-          <mdi-icon :name="item.icon" size="26" fill="white"></mdi-icon>
+          <v-mdi :name="item.icon" size="26" fill="white"></v-mdi>
         </button-ui>
       </router-link>
     </nav>

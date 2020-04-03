@@ -36,7 +36,7 @@
             <p class="inline-block text-white rounded-lg" style="padding: 5px 7px; width: 34px" :class="[getScoreBackground(item.score)]">{{ item.score }}</p>
           </td>
           <td v-if="showDelete">
-            <mdi-icon name="mdi-delete" @click="$emit('delete', item)" class="text-danger cursor-pointer"></mdi-icon>
+            <v-mdi name="mdi-delete" @click="$emit('delete', item)" class="text-danger cursor-pointer"></v-mdi>
           </td>
         </tr>
       </tbody>

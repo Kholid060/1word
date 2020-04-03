@@ -3,7 +3,7 @@
     <card-ui class="w-6/12 border mx-auto shadow-xl">
       <div class="flex items-center">
         <div class="icon p-2 rounded-lg" :class="[correct ? 'correct' : 'wrong']">
-          <mdi-icon :name="correct ? 'mdi-check' : 'mdi-close'" size="30"></mdi-icon>
+          <v-mdi :name="correct ? 'mdi-check' : 'mdi-close'" size="30"></v-mdi>
         </div>
         <p class="text-lg font-semibold ml-4">{{ correct ? 'Correct' : 'Wrong' }} answer</p>
         <div class="flex-grow"></div>

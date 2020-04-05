@@ -4,7 +4,7 @@
     <div class="flex mt-12 items-start">
       <div class="side">
         <card-ui width="320px">
-          <router-link v-for="setting in settings" :to="setting.path" :key="setting.path" class="mt-3 first:mt-0">
+          <router-link v-for="setting in settings" :to="setting.path" :key="setting.path" class="mb-3 block">
             <list-ui class="cursor-pointer" :class="{ 'bg-light text-primary': setting.path === $route.name }">
               <v-mdi :name="setting.icon" slot="prefix"></v-mdi>
               <span>{{ setting.name }}</span>
@@ -21,11 +21,10 @@
 <script>
 export default {
   data: () => ({
-    settings: [{ name: 'Blocked website', icon: 'mdi-link-lock', path: 'blocked' }],
+    settings: [
+      { name: 'Blocked website', icon: 'mdi-link-lock', path: 'blocked' },
+      { name: 'Preferences', icon: 'mdi-cog', path: 'preferences' },
+    ],
   }),
-  mounted() {
-    if (this.$route.query.name) this.$router.push(`settings/${this.$route.query.name}`);
-    else if (this.$route.name === 'settings') this.$router.push(`settings/${this.settings[0].path}`);
-  },
 };
 </script>

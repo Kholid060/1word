@@ -28,6 +28,7 @@ export default {
   computed: {
     wordLength() {
       const { popup } = this.$store.state;
+
       return Word.query()
         .where(word => {
           if (popup.activeId === 'all') return true;

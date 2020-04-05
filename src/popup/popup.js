@@ -11,22 +11,20 @@ import './plugins/vue-toastification';
 import { languageFilter } from '../utils/getLang';
 
 // Base Components
-import Button from '~/BaseComponents/BaseButton';
-import Card from '~/BaseComponents/BaseCard.vue';
-import Input from '~/BaseComponents/BaseInput';
-import List from '~/BaseComponents/BaseList.vue';
-import Paginate from '~/BaseComponents/BasePaginate.vue';
-import Select from '~/BaseComponents/BaseSelect.vue';
-import Textarea from '~/BaseComponents/BaseTextarea.vue';
-import Flag from '~/BaseComponents/BaseFlag.vue';
+import Button from '~/BaseComponents/components/BaseButton';
+import Card from '~/BaseComponents/components/BaseCard.vue';
+import Input from '~/BaseComponents/components/BaseInput';
+import List from '~/BaseComponents/components/BaseList.vue';
+import Paginate from '~/BaseComponents/components/BasePaginate.vue';
+import Select from '~/BaseComponents/components/BaseSelect.vue';
+import Textarea from '~/BaseComponents/components/BaseTextarea.vue';
+import Flag from '~/BaseComponents/components/BaseFlag.vue';
 
 // SCSS
 import '../assets/scss/base/tailwind.scss';
 import '../assets/scss/style.scss';
 import '../assets/scss/base/font.scss';
 import '../assets/scss/base/theme.scss';
-
-Vue.filter('getLang', languageFilter);
 
 Vue.component(Flag.name, Flag);
 Vue.component(Textarea.name, Textarea);
@@ -36,6 +34,8 @@ Vue.component(List.name, List);
 Vue.component(Button.name, Button);
 Vue.component(Card.name, Card);
 Vue.component(Input.name, Input);
+
+Vue.filter('getLang', languageFilter);
 
 global.browser = require('webextension-polyfill');
 

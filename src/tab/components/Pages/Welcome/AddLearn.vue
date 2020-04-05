@@ -24,7 +24,7 @@
 <script>
 import Learn from '~/store/models/Learn';
 import { supportedLanguages } from '~/utils/getLang';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
+import { addLearn } from '~/CRUD/Learn';
 
 const learns = supportedLanguages.map(id => ({ selected: false, id }));
 
@@ -39,10 +39,7 @@ export default {
   },
   methods: {
     addLearn() {
-      Learn.insert({
-        data: this.selected.map(item => ({ learn_id: item.id })),
-      }).then(() => {
-        saveDataIntoStorage('learns');
+      addLearn(this.selected.map(item => ({ learn_id: item.id }))).then(() => {
         this.$router.push('/');
       });
     },

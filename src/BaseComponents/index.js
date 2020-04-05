@@ -1,23 +1,21 @@
 import Vue from 'vue';
 
-import Card from './BaseCard.vue';
-import Button from './BaseButton.vue';
-import Flag from './BaseFlag.vue';
-import Progress from './BaseProgress.vue';
-import Input from './BaseInput.vue';
-import Textarea from './BaseTextarea.vue';
-import Select from './BaseSelect.vue';
-import EmptyState from './BaseEmptyState.vue';
-import List from './BaseList.vue';
-import Paginate from './BasePaginate.vue';
+const requireComponent = require.context(
+  // The relative path of the components folder
+  './components',
+  // Whether or not to look in subfolders
+  false,
+  // The regular expression used to match base component filenames
+  /Base[A-Z]\w+\.(vue|js)$/
+);
+requireComponent.keys().forEach(fileName => {
+  const componentConfig = requireComponent(fileName);
 
-Vue.component(Paginate.name, Paginate);
-Vue.component(List.name, List);
-Vue.component(EmptyState.name, EmptyState);
-Vue.component(Select.name, Select);
-Vue.component(Textarea.name, Textarea);
-Vue.component(Input.name, Input);
-Vue.component(Progress.name, Progress);
-Vue.component(Card.name, Card);
-Vue.component(Button.name, Button);
-Vue.component(Flag.name, Flag);
+  Vue.component(
+    componentConfig.default.name,
+    // Look for the component options on `.default`, which will
+    // exist if the component was exported with `export default`,
+    // otherwise fall back to module's root.
+    componentConfig.default || componentConfig
+  );
+});

@@ -6,23 +6,40 @@
     <button-ui icon round type="primary" @click="openPopup" v-tooltip.top="'Add word'" class="shadow-xl -mt-8">
       <v-mdi name="mdi-plus" size="40"></v-mdi>
     </button-ui>
-    <button-ui icon plain> </button-ui>
+    <button-ui icon plain v-tooltip.top="'Settings'" @click="openSettings">
+      <v-mdi name="mdi-cog"></v-mdi>
+    </button-ui>
   </div>
 </template>
 <script>
-import extTab from '~/utils/extTab';
+import url from 'url';
 import Bus from '~/utils/Bus';
 
 export default {
   methods: {
-    async openDashboard() {
-      extTab().then(() => {
+    async extTab(path = '/') {
+      const { hostname: extId } = url.parse(browser.runtime.getURL('/'));
+      const tabs = await browser.tabs.query({});
+      const getExtTab = tabs.filter(tab => url.parse(tab.url).hostname === extId);
+
+      if (getExtTab) {
+        browser.tabs.update(getExtTab[0].id, {
+          active: true,
+          url: `tab/tab.html#${path}`,
+        });
+      } else {
         this.$browser.tabs.create({
           active: true,
-          url: this.$browser.runtime.getURL('/tab/tab.html#/'),
+          url: this.$browser.runtime.getURL(`/tab/tab.html#/${path}`),
         });
-        window.close();
-      });
+      }
+      window.close();
+    },
+    openDashboard() {
+      this.extTab();
+    },
+    openSettings() {
+      this.extTab('/settings/preferences');
     },
     openPopup() {
       Bus.$emit('openWordPopup', { learnId: this.$store.state.popup.activeId, type: 'add' });

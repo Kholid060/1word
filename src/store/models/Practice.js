@@ -1,6 +1,5 @@
 import { Model } from '@vuex-orm/core';
 import shortId from 'shortid';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
 
 export default class Practice extends Model {
   static entity = 'practices';
@@ -19,9 +18,5 @@ export default class Practice extends Model {
 
   static beforeSelect(practices) {
     return practices.sort((a, b) => b.timestamp - a.timestamp);
-  }
-
-  static afterDelete() {
-    saveDataIntoStorage('practices');
   }
 }

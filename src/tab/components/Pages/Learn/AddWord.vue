@@ -17,9 +17,7 @@
 </template>
 <script>
 import debounce from 'lodash.debounce';
-import Word from '~/store/models/Word';
-import validateExistWord from '~/utils/validateExistWord';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
+import { addWord } from '~/CRUD/Word';
 
 export default {
   data: () => ({
@@ -33,27 +31,18 @@ export default {
     addWord() {
       if (this.word === '' && this.meaning === '') return;
 
-      const { id } = this.$route.params;
-      const isWordExist = Word.query()
-        .where(word => {
-          return validateExistWord(word, this.word, this.meaning, id);
+      addWord({
+        title: this.word,
+        meaning: this.meaning,
+        learn_id: this.$route.params.id,
+        timestamp: Date.now(),
+      })
+        .then(() => {
+          this.word = this.meaning = '';
         })
-        .exists();
-
-      if (isWordExist) return this.$toast.error(`You alread add ${this.word}`);
-
-      Word.insert({
-        data: {
-          title: this.word,
-          meaning: this.meaning,
-          timestamp: Date.now(),
-          learn_id: id,
-        },
-      });
-
-      saveDataIntoStorage('words', 'ttt');
-
-      this.word = this.meaning = '';
+        .catch(err => {
+          this.$toast.error(err);
+        });
     },
   },
 };

@@ -18,13 +18,14 @@
 </template>
 <script>
 import Learn from '~/store/models/Learn';
-import Practice from '~/store/models/Practice';
+import { deletePractice } from '~/CRUD/Practice';
+import { deleteLearn } from '~/CRUD/Learn';
 
-import LearnCard from '~/tab/components/Pages/Learn/LearnCard.vue';
-import WordList from '~/tab/components/Pages/Learn/WordList.vue';
-import AddWord from '~/tab/components/Pages/Learn/AddWord.vue';
-import PracticeCard from '~/tab/components/Pages/Learn/PracticeCard.vue';
-import PracticeHistory from '~/tab/components/ui/PracticeHistory.vue';
+import LearnCard from '../components/Pages/Learn/LearnCard.vue';
+import WordList from '../components/Pages/Learn/WordList.vue';
+import AddWord from '../components/Pages/Learn/AddWord.vue';
+import PracticeCard from '../components/Pages/Learn/PracticeCard.vue';
+import PracticeHistory from '../components/ui/PracticeHistory.vue';
 
 export default {
   components: { LearnCard, WordList, AddWord, PracticeCard, PracticeHistory },
@@ -33,10 +34,19 @@ export default {
       return this.$route.params.id;
     },
     learn() {
-      return Learn.query()
-        .where('learn_id', this.learnId)
-        .withAll()
-        .first();
+      if (
+        !Learn.query()
+          .where('learn_id', this.learnId)
+          .exists()
+      )
+        this.$router.push('/');
+
+      return (
+        Learn.query()
+          .where('learn_id', this.learnId)
+          .withAll()
+          .first() || { practices: [], words: [] }
+      );
     },
   },
   methods: {
@@ -46,10 +56,13 @@ export default {
     deleteLearn() {
       const id = this.learn.$id;
 
-      return Learn.delete(id).then(() => {
-        if (Learn.all().length === 0) this.$router.push({ path: '/welcome', query: { id: 'add-learn' } });
-        else this.$router.push('/');
-      });
+      deleteLearn(id, this.learn.learn_id)
+        .then(() => {
+          this.$router.push('/');
+        })
+        .catch(() => {
+          this.$router.push({ path: '/welcome', query: { id: 'add-learn' } });
+        });
     },
   },
   mounted() {

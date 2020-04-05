@@ -2,7 +2,6 @@ import { Model } from '@vuex-orm/core';
 import shortId from 'shortid';
 import Word from './Word';
 import Practice from './Practice';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
 
 export default class Learn extends Model {
   static entity = 'learns';
@@ -14,14 +13,5 @@ export default class Learn extends Model {
       words: this.hasMany(Word, 'learn_id', 'learn_id'),
       practices: this.hasMany(Practice, 'learn_id', 'learn_id'),
     };
-  }
-
-  static afterDelete({ learn_id }) {
-    Practice.delete(practice => practice.learn_id === learn_id);
-    Word.delete(word => word.learn_id === learn_id);
-
-    saveDataIntoStorage('learns');
-    saveDataIntoStorage('words');
-    saveDataIntoStorage('practices');
   }
 }

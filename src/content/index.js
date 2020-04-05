@@ -13,13 +13,13 @@ import popper from './components/popper';
   document.body.appendChild(popoverEl);
 })();
 
-document.addEventListener('dblclick', event => {
+document.addEventListener('dblclick', async event => {
+  const { settings } = await getStorage('settings');
   const text = window
     .getSelection()
     .toString()
     .trim()
     .toLocaleLowerCase();
-  const hasAttribute = attribute => event.target.hasAttribute(attribute);
   const virtualElement = {
     getBoundingClientRect: () => ({
       width: 0,
@@ -31,8 +31,9 @@ document.addEventListener('dblclick', event => {
     }),
   };
   const hasOneWordClass = /oneWord-/g.test(event.target.className);
+  const isCtrlClick = !settings.ctrlClick ? true : event.ctrlKey;
 
-  if (!!text && !hasOneWordClass && !hasAttribute('oneWord-data')) popper(virtualElement, 'AddWord', text);
+  if (!!text && !hasOneWordClass && isCtrlClick) popper(virtualElement, 'AddWord', text);
 });
 
 getStorage('words').then(({ words }) => {

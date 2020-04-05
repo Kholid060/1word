@@ -43,6 +43,7 @@ export default {
   },
   mounted() {
     const contentEl = document.getElementById('content');
+
     contentEl.addEventListener('scroll', event => {
       this.small = contentEl.scrollTop >= 50;
     });

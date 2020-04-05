@@ -1,21 +1,27 @@
 import { getStorage } from './storage';
-import Learn from '~/store/models/Learn';
-import Word from '~/store/models/Word';
-import Practice from '~/store/models/Practice';
+import { createLearn } from '~/CRUD/Learn';
+import { createPractice } from '~/CRUD/Practice';
+import { createWord } from '~/CRUD/Word';
 import store from '~/store';
 
-const dataKey = ['learns', 'practices', 'words', 'blockedWebsite'];
+const dataKey = ['learns', 'practices', 'words', 'blockedWebsite', 'settings'];
+function updateStore(key, data) {
+  store.commit('updateState', {
+    key,
+    data,
+  });
+}
 
 export default function() {
   return new Promise(async (resolve, reject) => {
-    const { learns, practices, words, blockedWebsite } = await getStorage(dataKey);
-    Learn.create({ data: learns });
-    Practice.create({ data: practices });
-    Word.create({ data: words });
-    store.commit('updateState', {
-      key: 'blockedWebsite',
-      data: blockedWebsite,
-    });
+    const { learns, practices, words, blockedWebsite, settings } = await getStorage(dataKey);
+
+    createLearn(learns);
+    createWord(words);
+    createPractice(practices);
+
+    updateStore('blockedWebsite', blockedWebsite);
+    updateStore('settings', settings);
 
     resolve({
       learns,

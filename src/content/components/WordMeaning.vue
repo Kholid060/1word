@@ -1,6 +1,9 @@
 <template>
   <div class="onwWord-popover--word-meaning">
-    <p class="main-word" :title="data.text">{{ data.text }}</p>
+    <div class="main-word-container">
+      <p class="main-word" :title="data.text">{{ data.text }}</p>
+      <img :src="require('~/assets/svg/speaker.svg').default" class="speaker" @click="speak" v-if="isVoiceAvailable" />
+    </div>
     <select class="oneWord-popover--select" v-model="activeId">
       <option v-for="id in learns" :value="id">
         {{ filterId(id) }}
@@ -14,6 +17,7 @@
 <script>
 import { getStorage } from '~/utils/storage';
 import { languageFilter } from '~/utils/getLang';
+import textToSpeech, { getVoices } from '~/utils/textToSpeech';
 
 export default {
   data: () => ({
@@ -24,10 +28,18 @@ export default {
     filterId(id) {
       return languageFilter(id);
     },
+    speak() {
+      textToSpeech(this.data.text, languageFilter(this.activeId, 'code'));
+    },
   },
   computed: {
     learns() {
       return Object.keys(this.meanings);
+    },
+    isVoiceAvailable() {
+      return getVoices().some(voice => {
+        return voice.lang === languageFilter(this.activeId, 'code');
+      });
     },
   },
   async mounted() {
@@ -50,19 +62,27 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/scss/base/variables.scss';
 
-.main-word {
-  font-size: 25px;
-  font-weight: bold;
-  line-height: 1.3;
-  margin: 0 0 16px 0;
-  text-transform: capitalize;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.main-word-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 5px;
+  .main-word {
+    font-size: 25px;
+    font-weight: bold;
+    padding-right: 10px;
+    line-height: 1.3;
+    margin: 0;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 .word-meaning {
   margin-top: 15px;
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 8px;
   padding: 15px 13px;
   background-color: #eff5fe;

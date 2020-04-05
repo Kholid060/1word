@@ -55,7 +55,9 @@ export default {
     sources() {
       const learns = Learn.all().map(learn => learn.learn_id);
 
-      return sources.filter(source => learns.includes(source.id) && source.sources.length !== 0);
+      return sources.filter(source => {
+        return learns.includes(source.id) && source.sources.length !== 0 && this.filterByCategory(source.sources).length !== 0;
+      });
     },
   },
   methods: {

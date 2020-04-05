@@ -17,7 +17,7 @@
 import SideMenu from './components/layout/SideMenu.vue';
 import Aside from './components/layout/Aside.vue';
 import retrieveData from '~/utils/retrieveData';
-import extTab from '~/utils/extTab';
+import storageChangedListener from '~/utils/storageChangedListener';
 
 export default {
   components: { SideMenu, Aside },
@@ -29,9 +29,7 @@ export default {
     };
   },
   created() {
-    extTab().catch(tabs => {
-      this.$browser.tabs.remove(tabs.filter(tab => !tab.active).map(tab => tab.id));
-    });
+    storageChangedListener();
     // function randomDate(start, end) {
     //     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     // }

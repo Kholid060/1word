@@ -35,7 +35,7 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import FlagCard from '../ui/FlagCard.vue';
 import Learn from '~/store/models/Learn';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
+import { addLearn } from '~/CRUD/Learn';
 import { supportedLanguages } from '~/utils/getLang';
 
 export default {
@@ -54,11 +54,7 @@ export default {
   },
   methods: {
     addLearn(id) {
-      Learn.insert({
-        data: {
-          learn_id: id,
-        },
-      }).then(() => saveDataIntoStorage('learns'));
+      addLearn(id);
     },
   },
 };

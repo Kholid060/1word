@@ -49,3 +49,8 @@ body {
 .group:hover .group-hover\:visible {
   visibility: visible;
 }
+kbd {
+  @apply shadow px-2 py-1 rounded;
+  background-color: #ebecf0;
+  border: 2px solid white;
+}

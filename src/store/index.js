@@ -26,14 +26,27 @@ const Store = new Vuex.Store({
       activeMenu: '',
       activeId: 'all',
     },
+    settings: {
+      ctrlClick: false,
+    },
     blockedWebsite: [],
   },
   mutations: {
     updateState(state, { key, data }) {
-      Vue.set(state, key, data);
+      if (Array.isArray(data)) Vue.set(state, key, data);
+      else if (typeof data === 'object' && data.constructor === Object) {
+        const assignData = { ...state[key], ...data };
+
+        Vue.set(state, key, assignData);
+      }
+    },
+    updateSettings(state, { key, value }) {
+      Vue.set(state.settings, key, value);
+
+      setStorage('settings', state.settings);
     },
     blockedWebsite(state, { type, data }) {
-      if (type === 'delete') Vue.delete(state.blockedWebsite, data, 1);
+      if (type === 'delete') Vue.delete(state.blockedWebsite, data);
       else if (type === 'add') state.blockedWebsite.push(data);
 
       setStorage('blockedWebsite', state.blockedWebsite);

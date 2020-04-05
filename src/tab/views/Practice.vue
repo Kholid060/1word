@@ -27,7 +27,7 @@ import PracticeComplete from '../components/Pages/Practice/PracticeComplete.vue'
 import questionGenerator from '~/utils/questionGenerator';
 import Practice from '~/store/models/Practice';
 import Word from '~/store/models/Word';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
+import { addPractice } from '~/CRUD/Practice';
 
 export default {
   components: { Header, Message, Question, PracticeComplete },
@@ -53,16 +53,14 @@ export default {
       this.qNumber += 1;
 
       if (this.isPracticeDone) {
-        Practice.insert({
-          data: {
-            correct: this.correctCount,
-            wrong: this.questions.length - this.correctCount,
-            score: (this.correctCount / this.questions.length) * 100,
-            question_length: this.questions.length,
-            learn_id: this.$route.params.id,
-            timestamp: Date.now(),
-          },
-        }).then(() => saveDataIntoStorage('practices'));
+        addPractice({
+          correct: this.correctCount,
+          wrong: this.questions.length - this.correctCount,
+          score: (this.correctCount / this.questions.length) * 100,
+          question_length: this.questions.length,
+          learn_id: this.$route.params.id,
+          timestamp: Date.now(),
+        });
       }
     },
     answerQuestion(userAnswer) {

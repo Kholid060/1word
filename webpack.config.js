@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ExtensionReloader = require('webpack-extension-reloader');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 const { version } = require('./package.json');
 
@@ -105,6 +106,7 @@ const config = {
     new webpack.DefinePlugin({
       global: 'window',
     }),
+    new Dotenv(),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',

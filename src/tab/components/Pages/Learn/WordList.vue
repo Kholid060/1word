@@ -38,8 +38,7 @@
 </template>
 <script>
 import debounce from 'lodash.debounce';
-import Word from '~/store/models/Word';
-import validateExistWord from '~/utils/validateExistWord';
+import { updateWord, deleteWord } from '~/CRUD/Word';
 
 export default {
   props: {
@@ -82,25 +81,21 @@ export default {
       this.activeEdit = id;
     },
     deleteWord(wordId) {
-      Word.delete(wordId);
+      deleteWord(wordId);
     },
     updateWord(word) {
-      const isWordExist = Word.query()
-        .where(word => {
-          return validateExistWord(word, this.tempWord, this.tempMeaning, this.$route.params.id) && word.id !== this.activeEdit;
+      updateWord({
+        ...word,
+        title: this.tempWord,
+        meaning: this.tempMeaning,
+      })
+        .then(() => {
+          this.clearAll();
         })
-        .exists();
-
-      if (isWordExist) return this.$toast.error(`You already add ${this.tempWord}`);
-
-      Word.update({
-        where: this.activeEdit,
-        data: {
-          title: this.tempWord.replace(/\s/g, ''),
-          meaning: this.tempMeaning,
-        },
-      });
-      this.clearAll();
+        .catch(err => {
+          console.log(err);
+          this.$toast.error(err);
+        });
     },
     clearAll() {
       this.activeEdit = this.tempWord = this.tempMeaning = '';

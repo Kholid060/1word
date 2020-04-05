@@ -17,7 +17,7 @@
 </template>
 <script>
 import Word from '~/store/models/Word';
-import saveDataIntoStorage from '~/utils/saveDataIntoStorage';
+import { deleteWord } from '~/CRUD/Word';
 import Bus from '~/utils/Bus';
 
 export default {
@@ -67,7 +67,7 @@ export default {
       });
     },
     deleteWord({ id }) {
-      Word.delete(id).then(() => saveDataIntoStorage('words'));
+      deleteWord(id);
     },
     pageChangeHandler(type) {
       type === 'next' ? (this.currentPage += 1) : (this.currentPage -= 1);

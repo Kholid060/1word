@@ -1,8 +1,8 @@
 <template>
   <header class="justify-between flex items-center">
     <router-link :to="`/learn/${$route.params.id}`">
-      <button-ui v-tooltip.right="'Go back'">
-        <v-mdi name="mdi-chevron-down" rotate="90"></v-mdi>
+      <button-ui v-tooltip.right="'Go back'" icon>
+        <v-mdi name="mdi-chevron-down" :rotate="90"></v-mdi>
       </button-ui>
     </router-link>
     <progress-ui :value="progress" class="w-6/12"></progress-ui>

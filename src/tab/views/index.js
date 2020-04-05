@@ -6,6 +6,7 @@ import Settings from './Settings.vue';
 import Welcome from './Welcome.vue';
 
 import BlockedWebsite from './Settings/BlockedWebsite.vue';
+import Preferences from './Settings/Preferences.vue';
 
 import store from '~/store';
 import LearnModel from '~/store/models/Learn';
@@ -30,11 +31,17 @@ export default [
     name: 'settings',
     path: '/settings',
     component: Settings,
+    redirect: '/settings/blocked',
     children: [
       {
         name: 'blocked',
         path: 'blocked',
         component: BlockedWebsite,
+      },
+      {
+        name: 'preferences',
+        path: 'preferences',
+        component: Preferences,
       },
     ],
   },

@@ -1,7 +1,7 @@
 {
   "name": "1Word",
-  "version": "1.0.0",
-  "description": "Learn new language while browsing the web",
+  "version": "1.0.13",
+  "description": "Learn a language while browsing the web",
   "author": "kholid060 <kholid060@gmail.com>",
   "license": "MIT",
   "engines": {

@@ -14,6 +14,9 @@ browser.runtime.onInstalled.addListener(async () => {
       learns: [],
       practices: [],
       words: [],
+      settings: {
+        ctrlClick: false,
+      },
       blockedWebsite: ['https://www.google.com', 'https://mail.google.com', 'https://www.youtube.com', 'https://www.bing.com'],
     });
 

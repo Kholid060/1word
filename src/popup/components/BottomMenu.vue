@@ -20,10 +20,10 @@ export default {
     async extTab(path = '/') {
       const { hostname: extId } = url.parse(browser.runtime.getURL('/'));
       const tabs = await browser.tabs.query({});
-      const getExtTab = tabs.filter(tab => url.parse(tab.url).hostname === extId);
+      const getExtTab = tabs.find(tab => url.parse(tab.url).hostname === extId);
 
       if (getExtTab) {
-        browser.tabs.update(getExtTab[0].id, {
+        browser.tabs.update(getExtTab.id, {
           active: true,
           url: `tab/tab.html#${path}`,
         });

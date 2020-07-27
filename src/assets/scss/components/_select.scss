@@ -8,7 +8,7 @@
   z-index: 20;
 }
 .select-ui {
-  @apply bg-lighter px-3 py-2 rounded-lg border;
+  @apply px-3 py-2 rounded-lg border bg-input;
   cursor: pointer;
   display: inline-block;
   &--inner {
@@ -19,21 +19,17 @@
       @apply mr-2;
     }
   }
+  &.disabled {
+    opacity: 0.8;
+    pointer-events: none;
+  }
   &.block {
     display: block;
     width: 100%;
   }
   &:hover,
   &:focus {
-    @apply bg-light;
+    @apply bg-input-dark;
     outline: none;
-  }
-}
-.select-ui--item {
-  @apply px-3 py-2 rounded-lg;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  &:hover {
-    @apply bg-light;
   }
 }

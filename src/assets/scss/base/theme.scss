@@ -1,18 +1,14 @@
 @import './variables.scss';
 
-:root {
-  --primary: #{$primary};
-  --secondary: #{$secondary};
-  --danger: #{$danger};
-  --warning: #{$warning};
-  --green: #{$green};
-  --text-default: #{$n800};
-  --text-dark: #{$n900};
-  --text-light: #{$n200};
-  --text-lighter: #{$n60};
-  --bg-dark: #{$n800};
-  --bg-darker: #{$n900};
-  --bg-default: #{$n30};
-  --bg-light: #eff5fe;
-  --bg-lighter: #f7fafc;
+@mixin extractColors($colors) {
+  @each $name, $color in $colors {
+    --#{$name}: #{$color};
+  }
+}
+
+:host {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  @include extractColors($baseColors);
+  @include extractColors($lightTheme);
 }

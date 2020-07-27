@@ -1,56 +1,98 @@
-@import './animation/slideUpFade';
+@import './base/tailwind.scss';
 
-html,
-body {
-  font-size: 16px;
-  scroll-behavior: smooth;
+.alert {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  animation: slide 0.5s;
+  z-index: 999999;
+  @apply p-3 text-default;
 }
-body {
+
+pre {
   font-family: 'Inter', sans-serif;
-  @apply text-base text-default bg-lighter;
 }
-.line-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+[role='button'],
+button {
+  @apply py-2 px-3 rounded-lg text-white bg-primary;
+  &.large {
+    @apply px-4 py-3;
+  }
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.9;
+    @apply bg-default text-lighter;
+  }
 }
-.text-overflow {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-// linear-gradient(to right bottom, #0052cc, #0052cd, #0053cd, #0053ce, #0054cf)
-.slideUpFade {
-  animation: slideUpFade 0.4s ease;
-}
-.delete-dialog {
-  .dg-btn {
-    &.dg-btn--ok {
-      @apply bg-danger #{!important};
+
+.oneWord-popup {
+  .icon-container {
+    cursor: pointer;
+    img,
+    svg {
+      transition: all 200ms ease;
+    }
+    svg {
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.6);
+    }
+  }
+  &:hover {
+    .icon-container {
+      svg {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      img {
+        opacity: 0;
+        transform: scale(0.6);
+      }
     }
   }
 }
-.dg-btn {
-  &.dg-btn--cancel {
-    @apply text-default;
-    &:hover {
-      @apply bg-lighter #{!important};
-    }
-    background-color: transparent !important;
-  }
-  &.dg-btn--ok {
-    @apply bg-primary #{!important};
-    color: white !important;
-    border: none !important;
+
+.oneWord-popover {
+  width: 250px;
+  min-height: 200px;
+  z-index: 99;
+  svg:hover {
+    @apply text-primary;
   }
 }
-.group:hover .group-hover\:visible {
-  visibility: visible;
+
+select,
+input,
+textarea {
+  @apply p-3 rounded-lg rounded-lg bg-lighter;
+  transition: all 0.2s ease;
+  &:hover,
+  &:focus {
+    outline: none;
+    @apply bg-default;
+  }
 }
-kbd {
-  @apply shadow px-2 py-1 rounded;
-  background-color: #ebecf0;
-  border: 2px solid white;
+
+select {
+  cursor: pointer;
+}
+
+svg {
+  fill: currentColor;
+}
+
+div[role='card'] {
+  @apply rounded-lg p-3 bg-white shadow-xl border;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(30px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }

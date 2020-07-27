@@ -1,21 +1,18 @@
 const webpack = require('webpack');
 const ejs = require('ejs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ExtensionReloader = require('webpack-extension-reloader');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
-const { VueLoaderPlugin } = require('vue-loader');
 const { version } = require('./package.json');
 
 const config = {
   mode: process.env.NODE_ENV,
   context: __dirname + '/src',
   entry: {
-    'content/index': './content/index.js',
+    auth: './auth.js',
+    content: './content.js',
     background: './background.js',
-    'popup/popup': './popup/popup.js',
-    'tab/tab': './tab/tab.js',
   },
   output: {
     publicPath: '/',
@@ -23,17 +20,14 @@ const config = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.json'],
     alias: {
+      vue$: 'vue/dist/vue.esm.js',
       '~': path.resolve(__dirname, 'src/'),
     },
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        loaders: 'vue-loader',
-      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -42,7 +36,7 @@ const config = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'to-string-loader',
           {
             loader: 'css-loader',
             options: { importLoaders: 1 },
@@ -59,7 +53,7 @@ const config = {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'to-string-loader',
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -73,7 +67,18 @@ const config = {
       },
       {
         test: /\.sass$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader?indentedSyntax'],
+        use: [
+          'to-string-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [require('tailwindcss'), require('autoprefixer')],
+            },
+          },
+          'sass-loader?indentedSyntax',
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/,
@@ -82,13 +87,6 @@ const config = {
           name: '[name].[ext]',
           outputPath: '/images/',
           emitFile: false,
-        },
-      },
-      {
-        test: /\.(ogg|mp3|wav|mpe?g)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]',
         },
       },
       {
@@ -107,14 +105,9 @@ const config = {
       global: 'window',
     }),
     new Dotenv(),
-    new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
     new CopyWebpackPlugin([
       { from: 'icons', to: 'icons', ignore: ['icon.xcf'] },
-      { from: 'popup/popup.html', to: 'popup/popup.html', transform: transformHtml },
-      { from: 'tab/tab.html', to: 'tab/tab.html', transform: transformHtml },
+      { from: 'assets/css/matchWord.css', to: 'matchWord.css' },
       {
         from: 'manifest.json',
         to: 'manifest.json',

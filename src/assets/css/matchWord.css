@@ -1,0 +1,28 @@
+.oneWord-match:not(.disabled) {
+  position: relative;
+  cursor: pointer;
+}
+
+.oneWord-match:not(.disabled):before {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  background-color: rgba(0, 82, 204, 0.2);
+  content: '';
+  bottom: 0;
+  border-radius: 2px;
+  transition: all 0.2s cubic-bezier(0.26, 0.13, 0.17, 1.05);
+  padding: 0 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.oneWord-match:not(.disabled).open:before {
+  height: 100%;
+  background-color: rgba(0, 82, 204, 0.4);
+}
+
+.oneWord-match:not(.disabled):hover:before {
+  height: 100%;
+  background-color: rgba(0, 82, 204, 0.4);
+}

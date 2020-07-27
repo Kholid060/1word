@@ -8,6 +8,10 @@
       border: 1px solid var(--primary);
     }
   }
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.8;
+  }
   .switch-input {
     display: none;
     &:checked + .slider {
@@ -25,7 +29,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    @apply transition-colors transition-transform bg-light;
+    @apply transition-colors transition-transform bg-input;
     transition-duration: 0.4s;
     transition-timing-function: ease;
     &.round {
@@ -40,7 +44,9 @@
       content: '';
       height: 20px;
       position: absolute;
-      transition: 0.4s;
+      @apply transition-colors transition-transform;
+      transition-duration: 0.4s;
+      transition-timing-function: ease;
       width: 20px;
       left: 4px;
       bottom: 3px;

@@ -1,3 +1,38 @@
+@import '~/assets/scss/base/variables.scss';
+
 .tooltip-ui {
-  @apply bg-dark rounded-lg py-1 px-3 text-white;
+  @apply rounded-md py-2 px-3 shadow-xl text-sm;
+  z-index: 88;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: opacity 0.2s ease;
+  color: white;
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.vue-popover-theme {
+  z-index: 99;
+  .wrapper {
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  &[aria-hidden='true'] {
+    .wrapper {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  }
+
+  &[aria-hidden='false'] {
+    .wrapper {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 }

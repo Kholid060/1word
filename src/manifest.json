@@ -8,11 +8,17 @@
     "128": "icons/icon_128.png"
   },
   "browser_action": {
-    "default_title": "1Word",
-    "default_popup": "popup/popup.html"
+    "default_icon": "icons/icon_128_bw.png"
   },
+  "content_scripts": [
+    {
+      "js": ["auth.js"],
+      "matches": ["https://1word.netlify.app/*"]
+    }
+  ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
-  "permissions": ["unlimitedStorage", "storage", "tabs", "activeTab"]
+  "permissions": ["activeTab", "unlimitedStorage", "storage", "https://1word.netlify.app/*"]
 }

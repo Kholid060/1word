@@ -1,26 +1,16 @@
-@mixin cardSize($padding) {
-  .card-ui--header {
-    @apply px-#{$padding} pt-#{$padding};
-  }
-  .card-ui--content {
-    @apply p-#{$padding};
-  }
-  .card-ui--content {
-    @apply px-#{$padding} pb-#{$padding};
-  }
-}
+$padding: 5;
 
 .card-ui {
-  @apply rounded-lg;
+  @apply rounded-lg bg-card;
   transition-duration: 200ms;
   transition-timing-function: ease;
-  transition-property: background-color, color, box-shadow, transform;
+  transition-property: background-color, color, box-shadow, transform, border;
   min-width: 200px;
   overflow: hidden;
   &.disabled {
     pointer-events: none;
   }
-  &--image {
+  &__image {
     @apply rounded-tr-lg rounded-tl-lg;
     transition: transform 0.2s ease;
     .img-ui {
@@ -31,8 +21,16 @@
     @apply shadow-xl;
     transform: translateY(-2px);
   }
-  &.small {
-    @include cardSize(3);
+  .card-ui__header {
+    @apply px-#{$padding} pt-#{$padding};
   }
-  @include cardSize(4);
+  .card-ui__content {
+    @apply p-#{$padding};
+    &.no-padding {
+      padding: 0 !important;
+    }
+  }
+  .card-ui__footer {
+    @apply bg-lighter px-#{$padding} py-4;
+  }
 }
